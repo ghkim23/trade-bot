@@ -14,4 +14,9 @@ class BithumbRestServiceTest {
     void Ticker테스트(){
         bithumbRestService.getTicker("BTC", "KRW");
     }
+
+    @Test
+    void 오더북테스트(){
+        bithumbRestService.getOrderBook("BTC", "KRW");
+    }
 }

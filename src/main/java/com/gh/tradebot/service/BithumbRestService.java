@@ -21,4 +21,11 @@ public class BithumbRestService {
 
         log.error(result);
     }
+
+    public void getOrderBook(String coin, String market){
+        String result = bithumbWebClient.get().uri(uriBuilder -> uriBuilder.path("/public/orderbook/{coin}/{market}")
+                .build(coin,market)).retrieve().bodyToMono(String.class).block();
+
+        log.error(result);
+    }
 }
