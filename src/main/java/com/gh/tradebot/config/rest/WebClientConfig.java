@@ -13,8 +13,8 @@ public class WebClientConfig {
     public WebClient bithumbWebClient(){
         return WebClient.builder().baseUrl("https://api.bithumb.com").filter(ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
             if (clientResponse.statusCode().isError()) {
-                return clientResponse.bodyToMono(WebClientExceptionDetails.class)
-                        .flatMap(errorDetails -> Mono.error(new WebClientExceptionImpl(clientResponse.statusCode(), errorDetails)));
+                return clientResponse.bodyToMono(BithumWebClientExceptionDetails.class)
+                        .flatMap(errorDetails -> Mono.error(new BithumWebClientExceptionImpl(clientResponse.statusCode(), errorDetails)));
             }
             return Mono.just(clientResponse);
         })).build();
