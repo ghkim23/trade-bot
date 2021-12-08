@@ -1,5 +1,6 @@
 package com.gh.tradebot.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gh.tradebot.util.BithumUtil;
 import com.gh.tradebot.vo.BithumResponse;
 import com.gh.tradebot.vo.OrderBook;
@@ -13,9 +14,14 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class BithumbRestService {
     private static final Logger log = LogManager.getLogger(BithumbRestService.class);
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public BithumbRestService(WebClient bithumbWebClient){
         this.bithumbWebClient = bithumbWebClient;
@@ -31,12 +37,26 @@ public class BithumbRestService {
         log.info(response);
     }
 
-    public void getOrderBook (String coin, String market){
+    public OrderBook getOrderBook (String coin, String market){
         BithumResponse<OrderBook> response = bithumbWebClient.get().uri(uriBuilder -> uriBuilder.path("/public/orderbook/{coin}_{market}")
                         .build(coin,market)).retrieve()
                 .bodyToMono(new ParameterizedTypeReference<BithumResponse<OrderBook>>() {
                 }).block();
-        log.info(response);
+        return response.getData();
+    }
+
+    public List<OrderBook> getOrderBookAll (String market){
+        BithumResponse<Map<String, Object>> response = bithumbWebClient.get().uri(uriBuilder -> uriBuilder.path("/public/orderbook/ALL_{market}")
+                .build(market)).retrieve()
+                .bodyToMono(new ParameterizedTypeReference<BithumResponse<Map<String, Object>>>() {
+                }).block();
+        ArrayList<OrderBook> orderBooks = new ArrayList<>();
+        for(String key: response.getData().keySet()){
+            if(key.equalsIgnoreCase("payment_currency") || key.equalsIgnoreCase("timestamp")) continue;
+            OrderBook orderBook = mapper.convertValue(response.getData().get(key),OrderBook.class);
+            orderBooks.add(orderBook);
+        }
+        return orderBooks;
     }
 
     public void getAccountInfo (String apikey, String secret, String coin, String market) throws Exception{

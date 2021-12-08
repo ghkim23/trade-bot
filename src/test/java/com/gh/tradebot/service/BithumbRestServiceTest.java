@@ -21,7 +21,7 @@ class BithumbRestServiceTest {
 
     @Test
     void 오더북테스트(){
-        bithumbRestService.getOrderBook("BNT", "KRW");
+        bithumbRestService.getOrderBook("BNT", "BTC");
     }
 
     @Test
@@ -36,4 +36,8 @@ class BithumbRestServiceTest {
         }
     }
 
+    @Test
+    void 오더북올테스트(){
+        bithumbRestService.getOrderBookAll("KRW");
+    }
 }
