@@ -5,11 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClientException;
 
 @Getter
-public class BithumWebClientExceptionImpl extends WebClientException {
+public class BithumbWebClientExceptionImpl extends WebClientException {
     private final HttpStatus status;
-    private final BithumWebClientExceptionDetails details;
+    private final BithumbWebClientExceptionDetails details;
 
-    BithumWebClientExceptionImpl(HttpStatus status, BithumWebClientExceptionDetails details) {
+    BithumbWebClientExceptionImpl(HttpStatus status, BithumbWebClientExceptionDetails details) {
         super(status.getReasonPhrase());
         this.status = status;
         this.details = details;
