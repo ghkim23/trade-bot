@@ -1,6 +1,6 @@
 package com.gh.tradebot.service;
 
-import com.gh.tradebot.config.rest.BithumWebClientExceptionImpl;
+import com.gh.tradebot.config.rest.BithumWebClientException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ class BithumbRestServiceTest {
     void 회원정보테스트(){
         try {
             bithumbRestService.getAccountInfo("apikey", "seccrt","BNT", "KRW");
-        }catch (BithumWebClientExceptionImpl e){
+        }catch (BithumWebClientException e){
           log.error(e);
           log.error(e.getDetails());
         } catch (Exception e){
