@@ -13,7 +13,7 @@ public class WebClientConfig {
     public WebClient bithumbWebClient(){
         return WebClient.builder().baseUrl("https://api.bithumb.com").filter(ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
             if (clientResponse.statusCode().isError()) {
-                return clientResponse.bodyToMono(BithumWebClientExceptionDetails.class)
+                return clientResponse.bodyToMono(BithumbWebClientExceptionDetails.class)
                         .flatMap(errorDetails -> Mono.error(new BithumWebClientException(clientResponse.statusCode(), errorDetails)));
             }
             return Mono.just(clientResponse);

@@ -7,9 +7,9 @@ import org.springframework.web.reactive.function.client.WebClientException;
 @Getter
 public class BithumWebClientException extends WebClientException {
     private final HttpStatus status;
-    private final BithumWebClientExceptionDetails details;
+    private final BithumbWebClientExceptionDetails details;
 
-    BithumWebClientException(HttpStatus status, BithumWebClientExceptionDetails details) {
+    BithumWebClientException(HttpStatus status, BithumbWebClientExceptionDetails details) {
         super(status.getReasonPhrase());
         this.status = status;
         this.details = details;
