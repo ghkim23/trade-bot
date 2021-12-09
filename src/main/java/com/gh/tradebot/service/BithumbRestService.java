@@ -47,6 +47,7 @@ public class BithumbRestService {
 
     public List<OrderBook> getOrderBookAll (String market){
         BithumResponse<Map<String, Object>> response = bithumbWebClient.get().uri(uriBuilder -> uriBuilder.path("/public/orderbook/ALL_{market}")
+                .queryParam("count","1")
                 .build(market)).retrieve()
                 .bodyToMono(new ParameterizedTypeReference<BithumResponse<Map<String, Object>>>() {
                 }).block();
