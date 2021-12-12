@@ -20,43 +20,43 @@ Configutation:
       AppenderRef:
         - ref: Console_Appender
     Logger:
-      - name: org.hibernate.type
-        additivity: true
-        level: TRACE
-        AppenderRef:
-          - ref: Console_Appender
-      - name: org.hibernate.stat
-        additivity: true
-        level: DEBUG
-        AppenderRef:
-          - ref: Console_Appender
-      - name: org.hibernate.SQL
-        additivity: true
-        level: DEBUG
-        AppenderRef:
-          - ref: Console_Appender
-      - name: org.hibernate.tool.hbm2ddl
-        additivity: true
-        level: DEBUG
-        AppenderRef:
-          - ref: Console_Appender
-      - name: org.hibernate.type.BasicTypeRegistry
-        additivity: true
-        level: WARN
-        AppenderRef:
-          - ref: Console_Appender
-      - name: com.zaxxer.hikari.HikariConfig
-        additivity: true
-        level: DEBUG
-        AppenderRef:
-          - ref: Console_Appender
-      - name: com.zaxxer.hikari
-        additivity: true
-        level: TRACE
-        AppenderRef:
-          - ref: Console_Appender
+#      - name: org.hibernate.type
+#        additivity: true
+#        level: TRACE
+#        AppenderRef:
+#          - ref: Console_Appender
+#      - name: org.hibernate.stat
+#        additivity: true
+#        level: DEBUG
+#        AppenderRef:
+#          - ref: Console_Appender
+#      - name: org.hibernate.SQL
+#        additivity: true
+#        level: DEBUG
+#        AppenderRef:
+#          - ref: Console_Appender
+#      - name: org.hibernate.tool.hbm2ddl
+#        additivity: true
+#        level: DEBUG
+#        AppenderRef:
+#          - ref: Console_Appender
+#      - name: org.hibernate.type.BasicTypeRegistry
+#        additivity: true
+#        level: WARN
+#        AppenderRef:
+#          - ref: Console_Appender
+#      - name: com.zaxxer.hikari.HikariConfig
+#        additivity: true
+#        level: DEBUG
+#        AppenderRef:
+#          - ref: Console_Appender
+#      - name: com.zaxxer.hikari
+#        additivity: true
+#        level: TRACE
+#        AppenderRef:
+#          - ref: Console_Appender
 
-#  특정 패키지만 지정하고 싶을때 name에 클래스 표기 ex) kr.co.upchain.admin.ddd
+#  특정 패키지만 지정하고 싶을때 name에 클래스 표기
 #    Logger:
 #      - name: edu.project
 #        additivity: false

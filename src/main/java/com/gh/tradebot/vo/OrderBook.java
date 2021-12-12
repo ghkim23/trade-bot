@@ -9,6 +9,8 @@ public class OrderBook {
     private String timestamp;
     private String order_currency;
     private String payment_currency;
-    private List<Order> bids;
+    //매도
     private List<Order> asks;
+    //매수
+    private List<Order> bids;
 }
