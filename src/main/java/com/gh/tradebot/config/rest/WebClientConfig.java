@@ -21,6 +21,17 @@ public class WebClientConfig {
     }
 
     @Bean
+    public WebClient upbitWebClient(){
+        return WebClient.builder().baseUrl("https://api.upbit.com").filter(ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
+            if (clientResponse.statusCode().isError()) {
+                return clientResponse.bodyToMono(BithumbWebClientExceptionDetails.class)
+                        .flatMap(errorDetails -> Mono.error(new BithumWebClientException(clientResponse.statusCode(), errorDetails)));
+            }
+            return Mono.just(clientResponse);
+        })).build();
+    }
+
+    @Bean
     public WebClient telegramWebClient(){
         return WebClient.builder().baseUrl("https://api.telegram.org/").filter(ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
             if (clientResponse.statusCode().isError()) {

@@ -1,4 +1,4 @@
-package com.gh.tradebot.config;
+package com.gh.tradebot.config.spring;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;

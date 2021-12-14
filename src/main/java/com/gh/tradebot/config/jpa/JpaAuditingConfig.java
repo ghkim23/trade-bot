@@ -1,4 +1,4 @@
-package com.gh.tradebot.config;
+package com.gh.tradebot.config.jpa;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

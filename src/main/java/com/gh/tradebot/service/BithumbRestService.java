@@ -3,6 +3,7 @@ package com.gh.tradebot.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gh.tradebot.util.BithumUtil;
 import com.gh.tradebot.vo.BithumResponse;
+import com.gh.tradebot.vo.BithumbTicker;
 import com.gh.tradebot.vo.OrderBook;
 import com.gh.tradebot.vo.Ticker;
 import org.apache.logging.log4j.LogManager;
@@ -35,6 +36,22 @@ public class BithumbRestService {
                 .bodyToMono(new ParameterizedTypeReference<BithumResponse<Ticker>>() {
                 }).block();
         log.info(response);
+    }
+
+    public List<BithumbTicker> getTickerAll (String market){
+        BithumResponse<Map<String, Object>> response = bithumbWebClient.get().uri(uriBuilder -> uriBuilder.path("/public/ticker/ALL_{market}")
+                .build(market)).retrieve()
+                .bodyToMono(new ParameterizedTypeReference<BithumResponse<Map<String, Object>>>() {
+                }).block();
+        ArrayList<BithumbTicker> tickers = new ArrayList<>();
+        for(String key: response.getData().keySet()){
+            if(key.equalsIgnoreCase("date")) continue;
+            BithumbTicker ticker = mapper.convertValue(response.getData().get(key),BithumbTicker.class);
+            ticker.setMarket(market);
+            ticker.setCoin(key);
+            tickers.add(ticker);
+        }
+        return tickers;
     }
 
     public OrderBook getOrderBook (String coin, String market){
